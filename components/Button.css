@@ -1,0 +1,222 @@
+/**
+ * Qualia Button Component Styles
+ * Uses CSS Custom Properties from design tokens
+ */
+
+.qualia-button {
+  /* Base styles using tokens */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  
+  /* Focus styles for accessibility */
+  &:focus-visible {
+    outline: 2px solid var(--color-interactive-default);
+    outline-offset: 2px;
+  }
+  
+  /* Disabled state */
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+/* =================================
+ * BUTTON VARIANTS
+ * ================================= */
+
+/* Primary Button */
+.qualia-button--primary {
+  background-color: var(--color-interactive-default);
+  color: var(--color-text-inverse);
+  border-color: var(--color-interactive-default);
+  
+  &:hover:not(:disabled) {
+    background-color: var(--color-interactive-hover);
+    border-color: var(--color-interactive-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  &:active:not(:disabled) {
+    background-color: var(--color-interactive-pressed);
+    border-color: var(--color-interactive-pressed);
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* Secondary Button */
+.qualia-button--secondary {
+  background-color: transparent;
+  color: var(--color-interactive-default);
+  border-color: var(--color-interactive-default);
+  
+  &:hover:not(:disabled) {
+    background-color: var(--color-interactive-default);
+    color: var(--color-text-inverse);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  &:active:not(:disabled) {
+    background-color: var(--color-interactive-pressed);
+    border-color: var(--color-interactive-pressed);
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* Outline Button */
+.qualia-button--outline {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border-color: var(--color-border-default);
+  
+  &:hover:not(:disabled) {
+    border-color: var(--color-interactive-default);
+    color: var(--color-interactive-default);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  &:active:not(:disabled) {
+    background-color: var(--color-background-elevated);
+    box-shadow: var(--shadow-base);
+  }
+}
+
+/* Destructive Button */
+.qualia-button--destructive {
+  background-color: var(--color-error);
+  color: var(--color-text-inverse);
+  border-color: var(--color-error);
+  
+  &:hover:not(:disabled) {
+    background-color: #c82333;
+    border-color: #c82333;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  &:active:not(:disabled) {
+    background-color: #bd2130;
+    border-color: #bd2130;
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* Ghost Button */
+.qualia-button--ghost {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border-color: transparent;
+  
+  &:hover:not(:disabled) {
+    background-color: var(--color-background-elevated);
+    color: var(--color-interactive-default);
+  }
+  
+  &:active:not(:disabled) {
+    background-color: var(--color-neutral-100);
+  }
+}
+
+/* =================================
+ * BUTTON SIZES
+ * ================================= */
+
+.qualia-button--small {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  min-height: 2rem;
+}
+
+.qualia-button--medium {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-base);
+  min-height: 2.5rem;
+}
+
+.qualia-button--large {
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--font-size-lg);
+  min-height: 3rem;
+}
+
+/* =================================
+ * BUTTON MODIFIERS
+ * ================================= */
+
+.qualia-button--full-width {
+  width: 100%;
+}
+
+.qualia-button--loading {
+  cursor: not-allowed;
+  
+  .qualia-button__text--loading {
+    opacity: 0;
+  }
+}
+
+/* =================================
+ * LOADING SPINNER
+ * ================================= */
+
+.qualia-button__spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qualia-button__spinner-icon {
+  width: 1rem;
+  height: 1rem;
+  animation: spin 1s linear infinite;
+}
+
+.qualia-button__spinner-icon circle {
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
